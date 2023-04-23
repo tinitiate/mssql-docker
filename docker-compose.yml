@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+    
+    mssql:
+      image: mcr.microsoft.com/mssql/server:latest
+      restart: always
+      container_name: tinitiate-mssql
+      ports: 
+        - 1433:1433
+      volumes:
+        - mssql-data:/var/lib/mssql/data
+      environment:
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD=sbroot!23456
+      networks:
+        - tinitiate
+
+volumes:
+  mssql-data:
+    driver: local
+
+networks:
+  tinitiate:
+    driver: bridge
